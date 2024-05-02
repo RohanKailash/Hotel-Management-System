@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Room and Service Selection</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <style>
+    body {
+      color: #fff;
+      background: #3598dc;
+    }
+    .form-control {
+      min-height: 41px;
+      background: #f2f2f2;
+      box-shadow: none !important;
+      border: transparent;
+    }
+    .form-control:focus {
+      background: #e2e2e2;
+    }
+    .form-control,
+    .btn {
+      border-radius: 2px;
+    }
+    .login-form {
+      width: 350px;
+      margin: 30px auto;
+      text-align: center;
+    }
+    .login-form h2 {
+      margin: 10px 0 25px;
+    }
+    .login-form form {
+      color: #7a7a7a;
+      border-radius: 3px;
+      margin-bottom: 15px;
+      background: #fff;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+    }
+    .login-form .btn {
+      font-size: 16px;
+      font-weight: bold;
+      background: #3598dc;
+      border: none;
+      outline: none !important;
+    }
+    .login-form .btn:hover,
+    .login-form .btn:focus {
+      background: #2389cd;
+    }
+    .login-form a {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .login-form a:hover {
+      text-decoration: none;
+    }
+    .login-form form a {
+      color: #7a7a7a;
+      text-decoration: none;
+    }
+    .login-form form a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <body>
+    <div class="login-form">
+      <h1>Room and Service Selection</h1>
+      <form method="POST">
+        <label for="hotel">Select Hotel:</label>
+        <select name="hotel" id="hotel">
+          <option value="1">Grand Plaza Hotel</option>
+          <option value="2">Seaside Resort</option>
+          <option value="3">Palm Paradise</option>
+        </select>
+        <button type="submit" name="room_search">Search Rooms</button>
+      </form>
+      {% if rooms %}
+      <form method="POST">
+        <label for="room">Select Room:</label>
+        <select name="room" id="room">
+          {% for room in rooms %}
+          <option value="{{ room[0] }}">{{ room[1] }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" name="calculate_cost">
+          Calculate Total Cost
+        </button>
+      </form>
+      {% endif %} {% if room_cost %}
+      <h2>Room Cost: ${{ room_cost }}</h2>
+      {% endif %} {% if service_cost %}
+      <h3>Service Costs:</h3>
+      <ul>
+        {% for service in service_cost %}
+        <li>{{ service[1] }} - ${{ service[2] }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% if total_cost %}
+      <h2>Total Cost: ${{ total_cost }}</h2>
+      {% endif %} {% if room_available == 'Available' %}
+      <form method="POST">
+        <button type="submit" name="book_room">Book Room</button>
+      </form>
+      {% elif room_available == 'Not Available' %}
+      <p>Room is already booked.</p>
+      {% endif %} {% if room_booked=='True' %}
+      <p>Room successfully booked!</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

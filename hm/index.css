@@ -1,0 +1,208 @@
+.login-page-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.login-page-login-frame {
+  width: 100%;
+  height: 1024px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 1);
+}
+.login-page-loginpagebackground1 {
+  top: 0px;
+  flex: 1;
+  left: 1px;
+  width: 1534px;
+  height: 1024px;
+  position: absolute;
+}
+.login-page-rectangle1 {
+  top: 218px;
+  left: 1002px;
+  width: 367px;
+  height: 377px;
+  position: absolute;
+  box-sizing: content-box;
+  border-color: rgba(0, 0, 0, 1);
+  border-style: solid;
+  border-width: 1px;
+}
+.login-page-passwordfield {
+  top: 435px;
+  left: 1104px;
+  width: 163px;
+  height: 31px;
+  position: absolute;
+}
+.login-page-warningsymbol {
+  top: 472px;
+  left: 1107px;
+  width: 11px;
+  height: 9px;
+  position: absolute;
+}
+.login-page-text {
+  top: 373px;
+  left: 1118px;
+  color: rgba(255, 0, 0, 1);
+  width: 304px;
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login-page-username-field {
+  top: 342px;
+  left: 1104px;
+  width: 163px;
+  height: 31px;
+  position: absolute;
+}
+.login-page-text02 {
+  top: 310px;
+  left: 1101px;
+  color: rgba(0, 0, 0, 1);
+  width: 259px;
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: italic;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login-page-text04 {
+  top: 407px;
+  left: 1104px;
+  color: rgba(0, 0, 0, 1);
+  width: 163px;
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: italic;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login-page-chakra-biztech-logo {
+  top: 242px;
+  left: 1104px;
+  width: 163px;
+  height: 45px;
+  position: absolute;
+}
+.login-page-materialsymbolswarning {
+  top: 373px;
+  left: 1101px;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+}
+.login-page-materialsymbolswarning1 {
+  top: 611px;
+  left: 597px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.login-page-text06 {
+  top: 467px;
+  left: 1125px;
+  color: rgba(255, 0, 0, 1);
+  width: 304px;
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login-page-rectangle5 {
+  top: 501px;
+  left: 1146px;
+  width: 72px;
+  height: 24px;
+  position: absolute;
+}
+.login-page-rectangle6 {
+  top: 501px;
+  left: 1146px;
+  width: 72px;
+  height: 24px;
+  position: absolute;
+}
+.login-page-text08 {
+  top: 504px;
+  left: 1151px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Bold;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login-page-text10 {
+  top: 539px;
+  left: 1053px;
+  color: rgb(0, 0, 0);
+  width: 265px;
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Regular;
+  text-align: left;
+  font-family: "Inter";
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login-page-text13 {
+  top: 435px;
+  left: 1282px;
+  color: rgba(0, 0, 0, 1);
+  width: 78px;
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
