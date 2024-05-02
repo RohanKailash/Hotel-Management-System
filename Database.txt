@@ -1,0 +1,659 @@
+dbms project
+
+CREATE TABLE hotel ( 
+    Hotel_ID INT PRIMARY KEY, 
+    Name VARCHAR(20), 
+    Location VARCHAR(25), 
+    Rating DECIMAL(2, 1), 
+    Total_Rooms INT 
+)
+;
+
+CREATE TABLE room ( 
+    Room_ID INT PRIMARY KEY, 
+    Room_No VARCHAR(20), 
+    Type VARCHAR(50), 
+    Availability_Status VARCHAR(20), 
+    Occupancy INT, 
+    Price DECIMAL(10, 2), 
+    Hotel_ID INT, 
+    FOREIGN KEY (Hotel_ID) REFERENCES hotel(Hotel_ID) 
+)
+;
+
+CREATE TABLE service ( 
+    Service_ID INT PRIMARY KEY, 
+    Service_Name VARCHAR(50), 
+    Description VARCHAR(50), 
+    Cost DECIMAL(5, 2) 
+)
+;
+
+CREATE TABLE staff ( 
+    Staff_ID INT PRIMARY KEY, 
+    First_Name VARCHAR(20), 
+    Last_Name VARCHAR(20), 
+    Position VARCHAR(50), 
+    Contact_No VARCHAR(12), 
+    Hotel_ID INT, 
+    Service_ID INT, 
+    FOREIGN KEY (Hotel_ID) REFERENCES hotel(Hotel_ID), 
+    FOREIGN KEY (Service_ID) REFERENCES service(Service_ID) 
+)
+;
+
+CREATE TABLE guest ( 
+    Guest_ID INT PRIMARY KEY, 
+    First_Name VARCHAR(20), 
+    Last_Name VARCHAR(20), 
+    Email VARCHAR(40) 
+)
+;
+
+CREATE TABLE guest_contact ( 
+    Guest_ID INT, 
+    Contact_Number VARCHAR(20), 
+    PRIMARY KEY (Guest_ID, Contact_Number), 
+    FOREIGN KEY (Guest_ID) REFERENCES guest(Guest_ID) 
+)
+;
+
+CREATE TABLE reservation ( 
+    Reservation_ID INT PRIMARY KEY, 
+    Guest_ID INT, 
+    Check_In_Date DATE, 
+    Check_Out_Date DATE, 
+    Total_Cost DECIMAL(5, 2), 
+    FOREIGN KEY (Guest_ID) REFERENCES guest(Guest_ID) 
+)
+;
+
+CREATE TABLE room_reservation ( 
+    Room_ID INT, 
+    Reservation_ID INT, 
+    Guest_ID INT, 
+    PRIMARY KEY (Room_ID, Reservation_ID, Guest_ID), 
+    FOREIGN KEY (Room_ID) REFERENCES room(Room_ID), 
+    FOREIGN KEY (Reservation_ID) REFERENCES reservation(Reservation_ID), 
+    FOREIGN KEY (Guest_ID) REFERENCES guest(Guest_ID) 
+)
+;
+
+CREATE TABLE room_service ( 
+    Room_ID INT, 
+    Service_ID INT, 
+    PRIMARY KEY (Room_ID, Service_ID), 
+    FOREIGN KEY (Room_ID) REFERENCES room(Room_ID), 
+    FOREIGN KEY (Service_ID) REFERENCES service(Service_ID) 
+)
+;
+
+CREATE TABLE payment ( 
+    Payment_ID INT PRIMARY KEY, 
+    Reservation_ID INT, 
+    Guest_ID INT, 
+    Amount_Paid DECIMAL(5, 2), 
+    Payment_Date DATE, 
+    FOREIGN KEY (Reservation_ID) REFERENCES reservation(Reservation_ID), 
+    FOREIGN KEY (Guest_ID) REFERENCES guest(Guest_ID) 
+)
+;
+
+CREATE TABLE feedback ( 
+    Feedback_ID INT PRIMARY KEY, 
+    Guest_ID INT, 
+    Rating INT, 
+    Comments VARCHAR(50), 
+    Feedback_Date DATE, 
+    FOREIGN KEY (Guest_ID) REFERENCES guest(Guest_ID) 
+)
+;
+
+INSERT INTO hotel VALUES (1, 'Grand Plaza Hotel', 'Kolkata ,India', 4.5, 30)
+;
+
+INSERT INTO hotel VALUES (2, 'Seaside Resort', 'Chennai ,India', 4.2, 20)
+;
+
+INSERT INTO hotel VALUES (3, 'Palm Paradise', 'Mumbai ,India', 3.8, 15)
+;
+
+INSERT INTO room VALUES (101, '101', 'Deluxe Room', 'Not Available', 2, 150.00, 1)
+;
+
+INSERT INTO room VALUES (102, '102', 'Suite', 'Available', 3, 250.00, 1)
+;
+
+INSERT INTO room VALUES (103, '103', 'Standard Room', 'Not Available', 3, 100.00, 1)
+;
+
+INSERT INTO room VALUES (104, '104', 'Studio Apartment', 'Available', 4, 180.00, 1)
+;
+
+INSERT INTO room VALUES (105, '105', 'Deluxe Room', 'Available', 2, 150.00, 1)
+;
+
+INSERT INTO room VALUES (106, '106', 'Suite', 'Available', 4, 250.00, 1)
+;
+
+INSERT INTO room VALUES (107, '107', 'Standard Room', 'Not Available', 4, 100.00, 1)
+;
+
+INSERT INTO room VALUES (108, '108', 'Studio Apartment', 'Available', 2, 180.00, 1)
+;
+
+INSERT INTO room VALUES (201, '201', 'Ocean View Room', 'Available', 3, 120.00, 2)
+;
+
+INSERT INTO room VALUES (202, '202', 'Poolside Cabana', 'Not Available', 3, 180.00, 2)
+;
+
+INSERT INTO room VALUES (203, '203', 'Standard Room', 'Not Available', 4, 80.00, 2)
+;
+
+INSERT INTO room VALUES (204, '204', 'Family Suite', 'Available', 2, 150.00, 2)
+;
+
+INSERT INTO room VALUES (205, '205', 'Ocean View Room', 'Not Available', 2, 120.00, 2)
+;
+
+INSERT INTO room VALUES (206, '206', 'Poolside Cabana', 'Available', 2, 180.00, 2)
+;
+
+INSERT INTO room VALUES (207, '207', 'Standard Room', 'Not Available', 3, 80.00, 2)
+;
+
+INSERT INTO room VALUES (208, '208', 'Family Suite', 'Available', 2, 150.00, 2)
+;
+
+INSERT INTO room VALUES (301, '301', 'City View Room', 'Not Available', 2, 70.00, 3)
+;
+
+INSERT INTO room VALUES (302, '302', 'Business Suite', 'Available', 4, 100.00, 3)
+;
+
+INSERT INTO room VALUES (303, '303', 'Budget Room', 'Available', 4, 50.00, 3)
+;
+
+INSERT INTO room VALUES (304, '304', 'Studio Apartment', 'Not Available', 3, 80.00, 3)
+;
+
+INSERT INTO room VALUES (305, '305', 'City View Room', 'Not Available', 2, 70.00, 3)
+;
+
+INSERT INTO room VALUES (306, '306', 'Business Suite', 'Not Available', 3, 100.00, 3)
+;
+
+INSERT INTO room VALUES (307, '307', 'Budget Room', 'Available', 3, 50.00, 3)
+;
+
+INSERT INTO room VALUES (308, '308', 'Studio Apartment', 'Not Available', 4, 80.00, 3)
+;
+
+INSERT INTO service VALUES (537482, 'Laundry Service', 'Washing and ironing of clothes', 10.00)
+;
+
+INSERT INTO service VALUES (921764, 'Room Service', 'Delivery of food and beverages to the room', 5.00)
+;
+
+INSERT INTO service VALUES (654309, 'Airport Transfer', 'Pick-up or drop-off at the airport', 30.00)
+;
+
+INSERT INTO service VALUES (876521, 'Massage', 'Relaxation and stress relief massage', 50.00)
+;
+
+INSERT INTO service VALUES (123456, 'In-Room Movie', 'Selection of movies available to watch in the room', 15.00)
+;
+
+INSERT INTO service VALUES (987654, 'Breakfast Buffet', 'breakfast served in the hotel restaurant', 20.00)
+;
+
+INSERT INTO service VALUES (123789, 'Business Center Access', 'Use of computers, printers, in the business center', 10.00)
+;
+
+INSERT INTO service VALUES (456321, 'Babysitting Service', 'Childcare services provided in hotel premises', 25.00)
+;
+
+INSERT INTO staff VALUES (678546, 'Nia', 'Gupta', 'Concierge', '3452167890', 1, 123789)
+;
+
+INSERT INTO staff VALUES (543937, 'Ojas', 'Thakur', 'Room Service', '7894561230', 1, 537482)
+;
+
+INSERT INTO staff VALUES (372977, 'Piya', 'Rao', 'Restaurant Staff', '6783219045', 1, 921764)
+;
+
+INSERT INTO staff VALUES (338939, 'Ishaan', 'Kapoor', 'Security', '7890123456', 1, 876521)
+;
+
+INSERT INTO staff VALUES (484125, 'Jiya', 'Mehta', 'Chef', '2345678901', 1, 123456)
+;
+
+INSERT INTO staff VALUES (525546, 'Kabir', 'Khan', 'Waiter', '6789012345', 1, 123789)
+;
+
+INSERT INTO staff VALUES (495127, 'Kiara', 'Kaur', 'Chef', '5678901234', 1, 456321)
+;
+
+INSERT INTO staff VALUES (485528, 'Luv', 'Agarwal', 'Maintenance', '9012345678', 1, 987654)
+;
+
+INSERT INTO staff VALUES (522189, 'Manvi', 'Desai', 'Housekeeping', '8901234567', 1, 654309)
+;
+
+INSERT INTO staff VALUES (582010, 'Neil', 'Khanna', 'Receptionist', '1237890456', 1, 921764)
+;
+
+INSERT INTO staff VALUES (201521, 'Riya', 'Kumar', 'Housekeeping', '1234567890', 2, 123789)
+;
+
+INSERT INTO staff VALUES (202456, 'Rohan', 'Verma', 'Front Desk', '9876543210', 2, 921764)
+;
+
+INSERT INTO staff VALUES (203585, 'Siya', 'Das', 'Lifeguard', '5678901234', 2, 456321)
+;
+
+INSERT INTO staff VALUES (204897, 'Tanay', 'Bose', 'Restaurant Staff', '2345678901', 2, 987654)
+;
+
+INSERT INTO staff VALUES (205123, 'Trisha', 'Joshi', 'Security', '8765432190', 2, 654309)
+;
+
+INSERT INTO staff VALUES (206579, 'Vivaan', 'Yadav', 'Maintenance', '4567890123', 2, 876521)
+;
+
+INSERT INTO staff VALUES (207368, 'Zara', 'Mathur', 'Concierge', '3456789012', 2, 456321)
+;
+
+INSERT INTO staff VALUES (208766, 'Vivaan', 'Singh', 'Room Service', '6789012345', 2, 123456)
+;
+
+INSERT INTO staff VALUES (209128, 'Aahana', 'Mittal', 'Receptionist', '9012345678', 2, 921764)
+;
+
+INSERT INTO staff VALUES (214568, 'Yash', 'Jain', 'Manager', '7890123456', 2, 537482)
+;
+
+INSERT INTO staff VALUES (301856, 'Aadhya', 'Shah', 'Housekeeping', '1234567890', 3, 921764)
+;
+
+INSERT INTO staff VALUES (302456, 'Rehaan', 'Mehta', 'Front Desk', '9876543210', 3, 123456)
+;
+
+INSERT INTO staff VALUES (303478, 'Miraya', 'Patel', 'Chef', '5678901234', 3, 654309)
+;
+
+INSERT INTO staff VALUES (304569, 'Vivaan', 'Kapoor', 'Waiter', '2345678901', 3, 537482)
+;
+
+INSERT INTO staff VALUES (305782, 'Aanya', 'Sharma', 'Security', '8765432190', 3, 876521)
+;
+
+INSERT INTO staff VALUES (306159, 'Ishaan', 'Kaur', 'Maintenance', '4567890123', 3, 876521)
+;
+
+INSERT INTO staff VALUES (307753, 'Jiya', 'Singh', 'Concierge', '3456789012', 3, 987654)
+;
+
+INSERT INTO staff VALUES (308268, 'Kabir', 'Rao', 'Room Service', '6789012345', 3, 123456)
+;
+
+INSERT INTO staff VALUES (309751, 'Kiara', 'Khan', 'Restaurant Staff', '9012345678', 3, 537482)
+;
+
+INSERT INTO staff VALUES (310638, 'Luv', 'Gupta', 'Receptionist', '7890123456', 3, 921764)
+;
+
+INSERT INTO guest VALUES (1001, 'Riya', 'Sharma', 'riya.sharma@example.com')
+;
+
+INSERT INTO guest VALUES (1002, 'Rohan', 'Singh', 'rohan.singh@example.com')
+;
+
+INSERT INTO guest VALUES (1003, 'Aanya', 'Mehta', 'aanya.mehta@example.com')
+;
+
+INSERT INTO guest VALUES (1004, 'Vivaan', 'Patel', 'vivaan.patel@example.com')
+;
+
+INSERT INTO guest VALUES (1005, 'Aisha', 'Kapoor', 'aisha.kapoor@example.com')
+;
+
+INSERT INTO guest VALUES (1006, 'Ishaan', 'Kumar', 'ishaan.kumar@example.com')
+;
+
+INSERT INTO guest VALUES (1007, 'Jiya', 'Desai', 'jiya.desai@example.com')
+;
+
+INSERT INTO guest VALUES (1008, 'Kabir', 'Joshi', 'kabir.joshi@example.com')
+;
+
+INSERT INTO guest VALUES (1009, 'Kiara', 'Malhotra', 'kiara.malhotra@example.com')
+;
+
+INSERT INTO guest VALUES (1010, 'Luv', 'Gupta', 'luv.gupta@example.com')
+;
+
+INSERT INTO guest_contact VALUES (1001, '987-654-3210')
+;
+
+INSERT INTO guest_contact VALUES (1002, '888-901-2345')
+;
+
+INSERT INTO guest_contact VALUES (1003, '777-345-6789')
+;
+
+INSERT INTO guest_contact VALUES (1004, '666-789-0123')
+;
+
+INSERT INTO guest_contact VALUES (1005, '555-567-8901')
+;
+
+INSERT INTO guest_contact VALUES (1006, '444-789-0123')
+;
+
+INSERT INTO guest_contact VALUES (1007, '333-123-4567')
+;
+
+INSERT INTO guest_contact VALUES (1008, '222-567-8901')
+;
+
+INSERT INTO guest_contact VALUES (1009, '111-901-2345')
+;
+
+INSERT INTO guest_contact VALUES (1010, '000-345-6789')
+;
+
+INSERT INTO reservation VALUES (2001, 1001, '09-MAR-2024', '12-MAR-2024', 500.00)
+;
+
+INSERT INTO reservation VALUES (2002, 1002, '10-APR-2024', '15-APR-2024', 750.25)
+;
+
+INSERT INTO reservation VALUES (2003, 1003, '01-MAY-2024', '07-MAY-2024', 325.50)
+;
+
+INSERT INTO reservation VALUES (2004, 1004, '15-FEB-2024', '22-FEB-2024', 480.75)
+;
+
+INSERT INTO reservation VALUES (2005, 1005, '08-JUN-2024', '14-JUN-2024', 610.00)
+;
+
+INSERT INTO reservation VALUES (2006, 1001, '05-JUL-2024', '10-JUL-2024', 450.00)
+;
+
+INSERT INTO reservation VALUES (2007, 1006, '20-JAN-2024', '27-JAN-2024', 800.00)
+;
+
+INSERT INTO reservation VALUES (2008, 1002, '12-AUG-2024', '18-AUG-2024', 925.75)
+;
+
+INSERT INTO reservation VALUES (2009, 1007, '06-SEP-2024', '12-SEP-2024', 378.25)
+;
+
+INSERT INTO reservation VALUES (2010, 1003, '04-OCT-2024', '10-OCT-2024', 540.00)
+;
+
+INSERT INTO reservation VALUES (2011, 1008, '15-NOV-2024', '21-NOV-2024', 687.50)
+;
+
+INSERT INTO reservation VALUES (2012, 1005, '20-DEC-2024', '28-DEC-2024', 850.25)
+;
+
+INSERT INTO reservation VALUES (2013, 1004, '10-JAN-2025', '17-JAN-2025', 420.00)
+;
+
+INSERT INTO reservation VALUES (2014, 1001, '07-FEB-2025', '14-FEB-2025', 395.50)
+;
+
+INSERT INTO reservation VALUES (2015, 1009, '03-MAR-2025', '09-MAR-2025', 712.50)
+;
+
+INSERT INTO room_reservation VALUES (101, 2001, 1001)
+;
+
+INSERT INTO room_reservation VALUES (103, 2001, 1003)
+;
+
+INSERT INTO room_reservation VALUES (103, 2002, 1002)
+;
+
+INSERT INTO room_reservation VALUES (204, 2003, 1003)
+;
+
+INSERT INTO room_reservation VALUES (305, 2004, 1004)
+;
+
+INSERT INTO room_reservation VALUES (206, 2005, 1005)
+;
+
+INSERT INTO room_reservation VALUES (302, 2006, 1001)
+;
+
+INSERT INTO room_reservation VALUES (103, 2007, 1006)
+;
+
+INSERT INTO room_reservation VALUES (107, 2008, 1002)
+;
+
+INSERT INTO room_reservation VALUES (107, 2009, 1007)
+;
+
+INSERT INTO room_reservation VALUES (107, 2010, 1003)
+;
+
+INSERT INTO room_reservation VALUES (107, 2011, 1008)
+;
+
+INSERT INTO room_reservation VALUES (101, 2012, 1005)
+;
+
+INSERT INTO room_reservation VALUES (202, 2013, 1004)
+;
+
+INSERT INTO room_reservation VALUES (203, 2014, 1001)
+;
+
+INSERT INTO room_service VALUES (101, 123456)
+;
+
+INSERT INTO room_service VALUES (103, 456321)
+;
+
+INSERT INTO room_service VALUES (205, 876521)
+;
+
+INSERT INTO room_service VALUES (107, 654309)
+;
+
+INSERT INTO room_service VALUES (202, 921764)
+;
+
+INSERT INTO room_service VALUES (203, 537482)
+;
+
+INSERT INTO room_service VALUES (302, 123789)
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100001, 2001, 1001, 500.00, '09-MAR-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100002, 2002, 1002, 750.25, '10-APR-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100003, 2003, 1003, 325.50, '01-MAY-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100004, 2004, 1004, 480.75, '15-FEB-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100005, 2005, 1005, 610.00, '08-JUN-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100006, 2006, 1001, 450.00, '05-JUL-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100007, 2007, 1006, 800.00, '20-JAN-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100008, 2008, 1002, 925.75, '12-AUG-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100009, 2009, 1007, 378.25, '06-SEP-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100010, 2010, 1003, 540.00, '04-OCT-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100011, 2011, 1008, 687.50, '15-NOV-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100012, 2012, 1005, 850.25, '20-DEC-2024')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100013, 2013, 1004, 420.00, '10-JAN-2025')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100014, 2014, 1001, 395.50, '07-FEB-2025')
+;
+
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date) 
+VALUES (100015, 2015, 1009, 712.50, '03-MAR-2025')
+;
+
+INSERT INTO feedback (Feedback_ID, Guest_ID, Rating, Comments, Feedback_Date) 
+VALUES (1, 1001, 5, 'Great service!', '07-FEB-2025')
+;
+
+INSERT INTO feedback (Feedback_ID, Guest_ID, Rating, Comments, Feedback_Date) 
+VALUES (2, 1002, 4, 'Good experience.', '10-APR-2024')
+;
+
+INSERT INTO feedback (Feedback_ID, Guest_ID, Rating, Comments, Feedback_Date) 
+VALUES (3, 1003, 3, 'Average service.', '01-MAY-2024')
+;
+
+INSERT INTO feedback (Feedback_ID, Guest_ID, Rating, Comments, Feedback_Date) 
+VALUES (6, 1004, 5, 'Excellent service!', '15-FEB-2024')
+;
+
+INSERT INTO feedback (Feedback_ID, Guest_ID, Rating, Comments, Feedback_Date) 
+VALUES (7, 1005, 4, 'Good, but could be better.', '08-JUN-2024')
+;
+
+INSERT INTO feedback (Feedback_ID, Guest_ID, Rating, Comments, Feedback_Date) 
+VALUES (8, 1006, 3, 'Average, nothing special.', '20-JAN-2024')
+;
+
+INSERT INTO feedback (Feedback_ID, Guest_ID, Rating, Comments, Feedback_Date) 
+VALUES (9, 1007, 2, 'Poor service, not recommended.', '06-SEP-2024')
+;
+
+INSERT INTO feedback (Feedback_ID, Guest_ID, Rating, Comments, Feedback_Date) 
+VALUES (10, 1008, 5, 'Outstanding experience!', '15-NOV-2024')
+;
+
+SELECT Room_ID, Room_No, Type, Availability_Status, Occupancy, Price 
+FROM room 
+WHERE Type = 'Suite' AND Occupancy <= 3
+;
+
+SELECT s.Service_ID, s.Service_Name, s.Description, s.Cost 
+FROM service s 
+JOIN room_service rs ON s.Service_ID = rs.Service_ID 
+JOIN room r ON rs.Room_ID = r.Room_ID 
+WHERE r.Room_No = '101' AND r.Hotel_ID = 1
+;
+
+SELECT s.Staff_ID, s.First_Name, s.Last_Name, s.Position, s.Contact_No 
+FROM staff s 
+JOIN service se ON s.Service_ID = se.Service_ID 
+WHERE se.Service_Name = 'Laundry Service'
+;
+
+SELECT f.Feedback_ID, f.Guest_ID, f.Rating, f.Comments, f.Feedback_Date 
+FROM feedback f 
+JOIN reservation r ON f.Guest_ID = r.Guest_ID 
+JOIN room_reservation rr ON r.Reservation_ID = rr.Reservation_ID 
+JOIN room ro ON rr.Room_ID = ro.Room_ID 
+WHERE ro.Room_No = '103' AND ro.Hotel_ID = 1
+;
+
+SELECT p.Payment_ID, p.Reservation_ID, p.Guest_ID, p.Amount_Paid, p.Payment_Date 
+FROM payment p 
+JOIN guest g ON p.Guest_ID = g.Guest_ID 
+WHERE g.First_Name = 'Rohan'
+;
+
+SELECT r.Room_ID, r.Room_No, r.Type, r.Availability_Status, r.Occupancy, r.Price 
+FROM room r 
+WHERE r.Type = 'Budget Room' AND r.Hotel_ID = 3 AND r.Availability_Status = 'Available'
+;
+
+SELECT gc.Contact_Number 
+FROM guest_contact gc 
+JOIN room_reservation rr ON gc.Guest_ID = rr.Guest_ID 
+JOIN room ro ON rr.Room_ID = ro.Room_ID 
+JOIN hotel h ON ro.Hotel_ID = h.Hotel_ID 
+WHERE ro.Room_No = '202' AND h.Hotel_ID = 2
+;
+
+guest checkin
+
+-- Start a transaction
+
+
+-- Step 1: Check Room Availability
+-- This step is usually done in your application logic before executing the SQL commands.
+-- You would check if the room is available and then proceed with the booking if it is.
+
+-- Step 2: Update the Guest Table
+INSERT INTO guest (Guest_ID, First_Name, Last_Name, Email)
+VALUES (1011, 'Eren', 'Yadav', 'eren.yadav@example.com');
+
+-- Step 3: Update the Guest Contact Table
+INSERT INTO guest_contact (Guest_ID, Contact_Number)
+VALUES (1011, '123-456-7890');
+
+-- Step 4: Update the Reservation Table
+INSERT INTO reservation (Reservation_ID, Guest_ID, Check_In_Date, Check_Out_Date, Total_Cost)
+VALUES (2019, 1011, '01-APR-2024', '05-APR-2023', 300.00);
+
+-- Step 5: Update the Room_Reservation Table
+INSERT INTO room_reservation (Room_ID, Reservation_ID, Guest_ID)
+VALUES (201, 2019, 1011);
+
+-- Step 6: Update the Payment Table
+INSERT INTO payment (Payment_ID, Reservation_ID, Guest_ID, Amount_Paid, Payment_Date)
+VALUES (100016, 2019, 1011, 300.00, '01-APR-2024');
+
+-- Step 7: Update Room Availability
+UPDATE room
+SET Availability_Status = 'Not Available'
+WHERE Room_ID = 201;
+
+-- Commit the transaction
+
+guest checkout
+
+UPDATE room
+SET Availability_Status = 'Available'
+WHERE Room_ID = 201;
+
+-- Step 3: Delete room_service Entries for the Guest
+DELETE FROM room_service
+WHERE Room_ID = 201;
