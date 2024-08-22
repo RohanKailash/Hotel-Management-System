@@ -1,4 +1,4 @@
-#Hotel Management System
+# Hotel Management System
 
 This repository contains a web-based hotel management system built with:
 
