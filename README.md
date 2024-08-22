@@ -20,11 +20,3 @@ Configure Database: Use config.php to fill yours with your MySQL details.
 Run Apache: Start using your system and finish the installation of Apache by following the instructions.
 Run Flask Server: Change to the path to backend and run flask run.
 
-Usage:
-Access the system in your web browser at http:The website can be accessed through the URL: //localhost/ (or your server's IP address).
-
-Further Documentation:
-A deep explanation (user guide, API documentation, etc.) can be seen in the docs folder (suppose there exists).
-
-Contributions:
-There are also contributions that would help to enhance the other processes. Please consult CONTRIBUTING.md on what you can do to start contributing.
