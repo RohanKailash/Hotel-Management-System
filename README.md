@@ -15,7 +15,7 @@ Generate invoices and reports
 
 Getting Started:
 Prerequisites: PHP, Python (with Flask), a MySQL in a server Apache webserver.
-Clone Repository: git clone https://<your_github_repo_url>
+Clone Repository: git clone https://github.com/RohanKailash/Hotel-Management-System.git
 Configure Database: Use config.php to fill yours with your MySQL details.
 Run Apache: Start using your system and finish the installation of Apache by following the instructions.
 Run Flask Server: Change to the path to backend and run flask run.
